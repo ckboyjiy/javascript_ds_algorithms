@@ -177,7 +177,7 @@ function fact(n) {
 
     let result = 1;
     while (s.peek() !== null) {
-        result += s.pop();
+        result *= s.pop();
     }
     return result;
 }
