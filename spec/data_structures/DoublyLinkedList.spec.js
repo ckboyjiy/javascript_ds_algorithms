@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {DoublyLinkedList} from "../../data_structures/DoublyLinkedList";
+import {DoublyLinkedList} from "../../data_structures/linkedList/DoublyLinkedList";
 
 describe('DoublyLinkedList class test', () => {
 

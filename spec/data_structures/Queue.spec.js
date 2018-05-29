@@ -1,5 +1,5 @@
 import {assert, expect} from 'chai';
-import {Queue} from "../../data_structures/Queue";
+import {Queue} from "../../data_structures/queue/Queue";
 const fs = require('fs');
 
 describe('Queue class test', () => {

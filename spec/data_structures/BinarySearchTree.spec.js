@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BinarySearchTree} from "../../data_structures/BinarySearchTree";
+import {BinarySearchTree} from "../../data_structures/binarySearchTree/BinarySearchTree";
 
 describe('BinarySearchTree class test', () => {
     let tree;
