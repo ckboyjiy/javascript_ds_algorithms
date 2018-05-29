@@ -1,5 +1,5 @@
 import {assert, expect} from 'chai';
-import {Stack} from '../../data_structures/Stack';
+import {Stack} from '../../data_structures/stack/Stack';
 
 describe('Stack class test', () => {
     const stack = new Stack();
@@ -49,10 +49,10 @@ describe('Stack class test', () => {
         let num = 32;
         do {
             s.push(num % 2);
-            num = Math.floor(num /= 2);
+            num = Math.floor(num / 2);
         } while (num > 0);
         let converted = '';
-        while (s.size() > 0) {
+        while (s.peek() !== null) {
             converted += s.pop();
         }
         expect(converted).to.equal('100000');

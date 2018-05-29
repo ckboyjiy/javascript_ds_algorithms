@@ -16,11 +16,11 @@ export class Stack {
     }
 
     /**
-     * Stack에 객체(item)을 저장한다.
-     * @param item
+     * Stack에 요소(element)를 저장한다.
+     * @param element
      */
-    push(item) {
-        this.dataStore.push(item);
+    push(element) {
+        this.dataStore.push(element);
     }
 
     /**
