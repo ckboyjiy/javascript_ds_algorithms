@@ -78,7 +78,7 @@ describe('Queue class test', () => {
     });
 
     it('Should be able to use to radix sort', () => {
-        const nums = [1, 1001, 5, 55, 5005, 501, 15, 101, 1005, 11, 505, 5001, 51, 105];
+        const nums = [1, 10, 1001, 5, 55, 5005, 501, 15, 101, 1005, 11, 505, 5001, 51, 105];
         const maxdigit = 4;
 
         const queues = [];
@@ -98,8 +98,45 @@ describe('Queue class test', () => {
                 while (!v.empty()) {
                     target.push(v.dequeue());
                 }
-            }, []);
+            });
         }
-        expect(target.join(',')).to.equal('1,5,11,15,51,55,101,105,501,505,1001,1005,5001,5005');
+        expect(target.join(',')).to.equal('1,5,10,11,15,51,55,101,105,501,505,1001,1005,5001,5005');
+    })
+
+    it('Should be able to use to bank simulation', () => {
+        class BankTeller {
+            constructor(name) {
+                this.name = name;
+            }
+            receive(q) {
+                if (q.front() !== undefined) {
+                    let guest = q.dequeue();
+                    console.log(this.name, guest);
+                    if (typeof guest === 'number') {
+                        setTimeout(()=> {
+                            this.receive(q);
+                        }, guest * 1000);
+                    }
+                }
+            };
+        }
+
+        queue.enqueue(5);
+        queue.enqueue(2);
+        queue.enqueue(2);
+        queue.enqueue(4);
+        queue.enqueue(6);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        queue.enqueue(1);
+        queue.enqueue(5);
+        queue.enqueue(2);
+
+        const A = new BankTeller('A');
+        const B = new BankTeller('B');
+        const C = new BankTeller('C');
+        A.receive(queue);
+        B.receive(queue);
+        C.receive(queue);
     })
 })
