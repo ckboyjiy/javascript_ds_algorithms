@@ -111,7 +111,7 @@ const A = new BankTeller('A');
 const B = new BankTeller('B');
 const C = new BankTeller('C');
 
-// 고객을 초기화합니다.
+// 고객을 초기화합니다. 큐에 저장되는 값은 고객의 업무 처리 시간입니다.
 queue.enqueue(5);
 queue.enqueue(2);
 queue.enqueue(2);
