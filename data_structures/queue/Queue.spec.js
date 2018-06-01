@@ -1,5 +1,5 @@
 import {assert, expect} from 'chai';
-import {Queue} from "../../data_structures/queue/Queue";
+import {Queue} from "./Queue";
 const fs = require('fs');
 
 describe('Queue class test', () => {
@@ -47,7 +47,7 @@ describe('Queue class test', () => {
     it('Should be able to use to dance party simulation', () => {
         const males = new Queue();
         const females = new Queue();
-        const file = fs.readFileSync('./spec/data_structures/Queue.spec.txt', 'utf-8');
+        const file = fs.readFileSync('./data_structures/queue/Queue.spec.txt', 'utf-8');
         file.split('\n').forEach( v => {
             const dancer = v.split(' ');
             if (dancer[0] === 'F') {

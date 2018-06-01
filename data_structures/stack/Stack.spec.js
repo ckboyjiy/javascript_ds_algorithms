@@ -1,5 +1,5 @@
 import {assert, expect} from 'chai';
-import {Stack} from '../../data_structures/stack/Stack';
+import {Stack} from './Stack';
 
 describe('Stack class test', () => {
     const stack = new Stack();

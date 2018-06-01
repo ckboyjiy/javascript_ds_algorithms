@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Graph} from "../../data_structures/graph/Graph";
+import {Graph} from "./Graph";
 
 describe('Graph class test', () => {
     let graph;

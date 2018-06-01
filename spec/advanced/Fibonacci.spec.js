@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Fibonacci} from "../../advanced/Fibonacci";
 describe('The dynamic programming test', ()=> {
     it('should be compute the fibonacci numbers', ()=> {
-        const n = 50;
+        const n = 10;
         let fibo = new Fibonacci();
         let start = 0;
         let stop = 0;
