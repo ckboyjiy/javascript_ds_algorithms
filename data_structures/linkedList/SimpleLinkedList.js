@@ -56,15 +56,3 @@ export class Node {
         this.next = null; // 다음 연결될 참조 노드
     }
 }
-
-const list = new SimpleLinkedList();
-list.add(1);
-list.add(3);
-list.add(4);
-list.add(2, 0);
-list.add(5, 5);
-console.log(list.find(1));
-
-list.remove(2);
-list.remove(4);
-console.log(list);
