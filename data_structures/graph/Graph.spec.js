@@ -36,8 +36,9 @@ describe('Graph class test', () => {
         graph.addVertex('A');
         graph.addVertex('B');
         graph.addEdge('A', 'B');
-        expect(graph.findEdge('A')[0].dest).to.equal('B');
-        expect(graph.findEdge('B')[0].dest).to.equal('A');
+        expect(graph.findEdge('A')[0].dest.data).to.equal('B');
+        expect(graph.findEdge('B')[0].dest.data).to.equal('A');
+        expect(graph.findEdge('A', 'B')[0].dest.data).to.equal('B');
     });
     it('should be remove edge of A to B', () => {
         graph.addVertex('A');
@@ -46,6 +47,13 @@ describe('Graph class test', () => {
         graph.removeEdge('A', 'B');
         expect(graph.findEdge('A').length).to.equal(0);
         expect(graph.findEdge('B').length).to.equal(0);
+        graph.addVertex('C');
+        graph.addEdge('A', 'B');
+        graph.addEdge('A', 'C');
+        graph.removeEdge('A');
+        expect(graph.findEdge('A').length).to.equal(0);
+        expect(graph.findEdge('B').length).to.equal(0);
+        expect(graph.findEdge('C').length).to.equal(0);
     });
     it('should be get string of graph', () => {
         graph.addVertex(0);
@@ -82,7 +90,7 @@ describe('Graph class test', () => {
         graph.addEdge('M', 'J');
         const result = [];
         graph.dfs('A', (val) => {
-           result.push(val);
+           result.push(val.data);
         });
         expect(result.join(',')).to.equal('A,X,G,H,E,M,Y,J,P');
     });
@@ -109,10 +117,11 @@ describe('Graph class test', () => {
         graph.addEdge('M', 'J');
         const result = [];
         graph.bfs('A', (val) => {
-            result.push(val);
+            result.push(val.data);
         });
         expect(result.join(',')).to.equal('A,X,G,H,P,E,M,Y,J');
     });
+
     it('should be find the shortest path', () => {
         graph.addVertex('A');
         graph.addVertex('X');
@@ -138,6 +147,7 @@ describe('Graph class test', () => {
         expect(path.join('->')).to.equal('A->X->H->E->M->J');
         graph.addEdge('P', 'J');
         const path2 = graph.pathFromTo('A', 'J');
+        expect(path2.join('->')).to.equal('A->X->G->P->J');
     });
     it('should be use to topological sort', () => {
         graph.addVertex('CS1');
