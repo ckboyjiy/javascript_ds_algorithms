@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {MergeSort} from "../../sort/MergeSort";
+import {MergeSort} from "./MergeSort";
 
 describe('zz', () => {
     it('aa', () => {

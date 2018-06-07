@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {InsertionSort} from "../../sort/InsertionSort";
+import {InsertionSort} from "./InsertionSort";
 
 describe('Insertion class test', ()=> {
     it('should be sort array', () => {

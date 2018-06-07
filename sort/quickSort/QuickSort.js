@@ -1,4 +1,4 @@
-import {RandomArray} from "./RandomArray";
+import {RandomArray} from "../RandomArray";
 
 export class QuickSort extends RandomArray {
     constructor(number = 0) {

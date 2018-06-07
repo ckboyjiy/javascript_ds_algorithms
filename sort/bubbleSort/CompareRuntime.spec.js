@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import {BubbleSort} from "../../sort/BubbleSort";
-import {SelectionSort} from "../../sort/SelectionSort";
-import {InsertionSort} from "../../sort/InsertionSort";
+import {BubbleSort} from "./BubbleSort";
+import {SelectionSort} from "../selectionSort/SelectionSort";
+import {InsertionSort} from "../insertionSort/InsertionSort";
 
 describe('compare runtime each sort class', () => {
     const bubble = new BubbleSort();

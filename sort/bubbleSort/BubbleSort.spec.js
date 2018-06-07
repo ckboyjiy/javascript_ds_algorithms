@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BubbleSort} from "../../sort/BubbleSort";
+import {BubbleSort} from "./BubbleSort";
 
 describe('BubbleSort class test', ()=> {
     let arr;

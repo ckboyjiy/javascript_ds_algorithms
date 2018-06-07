@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {RandomArray} from "../../sort/RandomArray";
+import {RandomArray} from "./RandomArray";
 
 describe('RandomArray class test', () => {
     let arr;

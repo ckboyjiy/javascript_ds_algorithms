@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ShellSort} from "../../sort/ShellSort";
+import {ShellSort} from "./ShellSort";
 
 describe('ShellSort class test', ()=> {
     it('should be sort a array', ()=> {

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {QuickSort} from "../../sort/QuickSort";
+import {QuickSort} from "./QuickSort";
 describe('QuickSort class test', () => {
     it('should be sort a array', ()=> {
         const arr = new QuickSort();

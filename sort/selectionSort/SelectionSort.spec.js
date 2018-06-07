@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SelectionSort} from "../../sort/SelectionSort";
+import {SelectionSort} from "./SelectionSort";
 
 describe('SelectionSort class test', () => {
     let arr;
