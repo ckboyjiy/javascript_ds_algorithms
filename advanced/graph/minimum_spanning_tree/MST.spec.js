@@ -25,7 +25,4 @@ describe('MST for Prim\'s algorithm Test', () => {
 
         expect(graph.prim().join(', ')).to.equal('A, D, B, C, S');
     })
-    it('case 2', () => {
-
-    });
 })
