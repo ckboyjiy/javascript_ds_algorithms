@@ -25,7 +25,7 @@ export class TSP extends Graph {
         this.edges[index2].push(new Edge(obj1, weight));
     }
 
-    shortest() {
+    tsp() {
         /** 정점간의 가중치 (거리)를 담은 이차원 배열 */
         this.w = [];
         for (let i = 0; i < this.vertices.length; i++) {
@@ -36,7 +36,7 @@ export class TSP extends Graph {
                     const aa = this.findVertexIndex(edge.dest);
                     return this.findVertexIndex(edge.dest) === j
                 } );
-                this.w[i][j] = temp ? temp.weight : Infinity;
+                this.w[i][j] = temp ? temp.weight : i === j ? 0 : Infinity;
             }
         }
 
@@ -51,34 +51,84 @@ export class TSP extends Graph {
             }
         }
 
-        return this._shortest(0, 0);
+        const s = 0;
+        this.setup();
+        this.solve(s);
+        const minCost = this.findMinCost(s);
+        const minTour = this.findOptimalTour(s);
+        return {minCost, minTour};
     }
 
-    _shortest(curr, visited) {
-        const test1 = ((1 << this.vertices.length-1) - 1).toString(2);
-        if (visited === (1 << this.vertices.length-1) - 1) { // 모든 정점을 다 방문했으면
-            return this.w[curr][0]; //
+    setup() {
+        for (let i = 1; i < this.vertices.length; i++) {
+            this.dp[i][1 << 0 | 1 << i] = this.w[0][i];
         }
-
-        if (this.dp[curr][visited] >= 0) {
-            return this.dp[curr][visited];
-        }
-
-        let result = Infinity;
-        for (let next = 0; next < this.vertices.length; next++) {
-            if ((visited & (1 << (next - 1))) !== 0) {
-                continue;
-            }
-            if (this.w[curr][next] === 0) {
-                continue;
-            }
-            if (visited+(1 << (next-1)) < 0) {
-                continue;
-            }
-            const temp = this.w[curr][next] + this._shortest(next, visited+(1 << (next-1)));
-            result = Math.min(result, temp);
-        }
-        return this.dp[curr][visited] = result;
     }
-
+    solve(s) {
+        for (let r = 3; r <= this.vertices.length; r++) {
+            for (let subset of this.combinations(0, 0 , r)) {
+                if (this.notIn(s, subset)) continue;
+                for (let next = 0; next < this.vertices.length; next++) {
+                    if (next === s || this.notIn(next, subset)) continue;
+                    const state = subset ^ ( 1 << next);
+                    let minDist = Infinity;
+                    for (let e = 0; e < this.vertices.length; e++) {
+                        if (e === s || e === next || this.notIn(e, subset)) continue;
+                        const newDistance = this.dp[e][state] + this.w[e][next];
+                        if (newDistance < minDist) {
+                            minDist = newDistance;
+                        }
+                        this.dp[next][subset] = minDist;
+                    }
+                }
+            }
+        }
+    }
+    notIn(i, subset) {
+        return ((1 << i) & subset) === 0;
+    }
+    combinations(set, at, r, subset = []) {
+        if (r === 0) {
+            subset.push(set);
+        } else {
+            for (let i = at; i < this.vertices.length; i++) {
+                set = set | (1 << i);
+                subset = this.combinations(set, i + 1, r - 1, subset);
+                set = set & ~(1 << i);
+            }
+        }
+        return subset;
+    }
+    findMinCost(s) {
+        const END_STATE = (1 << this.vertices.length) - 1;
+        let minTourCost = Infinity;
+        for (let e = 0; e < this.vertices.length; e++) {
+            if (e === s) continue;
+            const tourCost = this.dp[e][END_STATE] + this.w[e][s];
+            if (tourCost < minTourCost) {
+                minTourCost = tourCost;
+            }
+        }
+        return minTourCost;
+    }
+    findOptimalTour(s) {
+        let lastIndex = s;
+        let state = (1 << this.vertices.length) - 1;
+        const tour = [];
+        for (let i = this.vertices.length - 1; i >= 1; i--) {
+            let index = -1;
+            for (let j = 0; j < this.vertices.length; j++) {
+                if (j === s || this.notIn(j, state)) continue;
+                if (index === -1) index = j;
+                const prevDist = this.dp[index][state] + this.w[index][lastIndex];
+                const newDist = this.dp[j][state] + this.w[j][lastIndex];
+                if (newDist < prevDist) index = j;
+            }
+            tour[i] = index;
+            state = state ^ (1 << index);
+            lastIndex = index;
+        }
+        tour[0] = tour[this.vertices.length] = s;
+        return tour;
+    }
 }

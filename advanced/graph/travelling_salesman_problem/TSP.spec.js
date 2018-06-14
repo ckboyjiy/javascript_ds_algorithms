@@ -22,10 +22,11 @@ describe('TSP Algorithm test', () => {
 
         graph.addEdge('S', 'D', 8);
         graph.addEdge('S', 'C', 7);
+        graph.addEdge('S', 'B', 2);
+        graph.addEdge('S', 'A', 5);
 
-        const result = graph.shortest();
-        expect(result).to.equal(21);
-
-        console.log('aaa');
+        const result = graph.tsp();
+        expect(result.minCost).to.equal(15);
+        expect(result.minTour.join(', ')).to.equal('0, 4, 1, 2, 3, 0');
     });
 })
