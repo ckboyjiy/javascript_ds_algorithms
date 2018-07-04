@@ -57,10 +57,10 @@ class Dijkstra extends Graph {
 ```
 
 ### 정점간의 경로 정보 배열 생성 및 초기화
-다음으로 입력받은 시작정점을 기준으로 그래프의 모든 정점간의 경로 정보를 담을 배열을 생성하고 값을 초기화를 하겠습니다.
+다음으로 입력받은 시작정점을 기준으로 그래프의 모든 정점간의 경로 정보를 담을 배열(shortest)을 생성하고 값을 초기화를 하겠습니다.
 경로 정보는 2가지의 값을 가지고 있습니다.
-* 총 거리 : 시작정점 -> 시작정점은 당연히 0으로 초기화하면 됩니다. 시작정점 -> 다른정점은 현재는 얼마나 걸리는지 알 수 없으므로 Infinity로 초기화합니다.
-* 경로 : 경로는 모두 빈 배열로 초기화합니다.
+* 총 거리(distance) : 시작정점 -> 시작정점은 당연히 0으로 초기화하면 됩니다. 시작정점 -> 다른정점은 현재는 얼마나 걸리는지 알 수 없으므로 Infinity로 초기화합니다.
+* 경로(path) : 경로는 모두 빈 배열로 초기화합니다.
 
 ```javascript
 class Dijkstra extends Graph {
@@ -85,7 +85,7 @@ class Dijkstra extends Graph {
 위에 링크로 걸린 동영상을 보시면 수행시간이 어떤 자료구조를 사용하느냐에 따라서 수행시간이 다른 것을 보실 수 있습니다.
 하지만 저는 특별한 자료구조를 사용하지 않고 시작정점을 시작으로 반복문을 수행하면서 방문가능한 정점에 대한 거리를 비교하면서 그 때마다 다음 방문할 인덱스를 선별하도록 하겠습니다.
 
-다만 방문한 인덱스는 제외하기 위해 단순 일차원 배열은 사용하도록 하겠습니다.
+다만 중복으로 방문하는 것을 방지하기 위해 단순 일차원 배열을 사용하여 방문 인덱스를 관리하도록 하겠습니다.
 ```javascript
 class Dijkstra extends Graph {
     ...
@@ -146,3 +146,50 @@ class Dijkstra extends Graph {
 }
 ```
 반복문을 수행하다보면 결국 다음 방문할 인덱스가 null이 될 것이고 이로서 탐색은 마무리됩니다.
+
+### 실행
+위의 그래프 그림을 참고하여 그래프 생성 및 정점 및 간선을 설정하면 아래와 같습니다.
+```javascript
+const graph = new Dijkstra();
+graph.addVertex('A');
+graph.addVertex('B');
+graph.addVertex('C');
+graph.addVertex('D');
+graph.addVertex('S')
+
+graph.addEdge('A', 'B', 2);
+graph.addEdge('A', 'C', 5);
+graph.addEdge('A', 'D', 1);
+graph.addEdge('B', 'C', 3);
+graph.addEdge('B', 'D', 6);
+graph.addEdge('C', 'D', 4);
+graph.addEdge('S', 'D', 8);
+graph.addEdge('S', 'C', 7);
+```
+
+그리고 위에서 만든 shortest함수를 이용해서 호출을 해봅니다.
+시작 정점은 S로 지정하면 아래와 같은 결과를 받을 수 있습니다.
+```javascript
+const shortest = graph.shortest('S');
+/* shortest 결과
+[
+  { distance: 9, path: [ 3, 0 ] },
+  { distance: 10, path: [ 2, 1 ] },
+  { distance: 7, path: [ 2 ] },
+  { distance: 8, path: [ 3 ] },
+  { distance: 0, path: [] } ]
+*/
+```
+shortest.path의 배열의 마지막 값이 최종 도착 정점이며, 각 장점까지의 최소 거리 및 경로는 아래와 같습니다.
+* 0 ('A') : 최단 거리 : 9, 경로 : 4 -> 3 -> 0
+* 1 ('B') : 최단 거리 : 10, 경로 : 4 -> 2 -> 1
+* 2 ('C') : 최단 거리 : 7, 경로 : 4 -> 2
+* 3 ('D') : 최단 거리 : 8, 경로 : 4 -> 3
+
+모든 정점 중 최단 거리를 가진 정점을 찹아보도록 하겠습니다.
+```javascript
+const result = shortest.filter(val => val.distance > 0).reduce((prev, curr) => prev.distance < curr.distance ? prev : curr);
+/* 결과
+{ distance: 7, path: [ 2 ] }
+*/
+```
