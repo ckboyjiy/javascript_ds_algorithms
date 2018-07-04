@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {BinarySearch} from "../../search/BinarySearch";
-import {LinearSearch} from "../../search/LinearSearch";
+import {BinarySearch} from "./binarySearch/BinarySearch";
+import {LinearSearch} from "./linearSearch/LinearSearch";
 const fs = require('fs');
 
 describe('The text search test', ()=> {

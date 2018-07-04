@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {BinarySearch} from "../../search/BinarySearch";
+import {BinarySearch} from "./BinarySearch";
 
 describe('BinarySearch class test', ()=> {
     it('should be retrieved index number of equal a specified value', ()=> {

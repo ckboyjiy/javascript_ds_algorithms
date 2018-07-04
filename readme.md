@@ -21,13 +21,13 @@ C#, 자바와 같은 일반적인 객체지향 언어에서 사용되는 자료�
 * [버블정렬 (Bubble Sort)](./sort/bubbleSort)
 * [선택정렬 (Selection Sort)](./sort/selectionSort)
 * [삽입정렬 (Insertion Sort)](./sort/insertionSort)
-* [셀정렬 (Shell Sort)](./shellSort)
-* [병합정렬 (Merge Sort)](./mergeSort)
-* [퀵정렬 (Quick Sort)](./quickSort)
+* [셀정렬 (Shell Sort)](./sort/shellSort)
+* [병합정렬 (Merge Sort)](./sort/mergeSort)
+* [퀵정렬 (Quick Sort)](./sort/quickSort)
 
 ### 검색 알고리즘
-* [순차검색 (Linear Search)]()
-* [이진검색 (Binary Search)]()
+* [순차검색 (Linear Search)](./search/binarySearch)
+* [이진검색 (Binary Search)](./search/linearSearch)
 
 ### 고급 알고리즘
 * [동적 프로그래밍 (Dynamic Programming)](./advanced)

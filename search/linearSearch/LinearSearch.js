@@ -1,4 +1,4 @@
-import {RandomArray} from "../sort/RandomArray";
+import {RandomArray} from "../../sort/RandomArray";
 
 export class LinearSearch extends RandomArray {
     constructor(number = 0) {

@@ -1,5 +1,5 @@
-import {RandomArray} from "../sort/RandomArray";
-import {QuickSort} from "../sort/quickSort/QuickSort";
+import {RandomArray} from "../../sort/RandomArray";
+import {QuickSort} from "../../sort/quickSort/QuickSort";
 
 export class BinarySearch extends QuickSort {
     constructor(number = 0) {

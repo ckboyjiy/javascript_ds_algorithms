@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {LinearSearch} from "../../search/LinearSearch";
+import {LinearSearch} from "./LinearSearch";
 
 describe('LinearSearch class test', () => {
     it('should be retrieved index number of equal a specified value in array', ()=> {
