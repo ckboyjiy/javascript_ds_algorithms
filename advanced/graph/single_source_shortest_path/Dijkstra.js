@@ -24,40 +24,48 @@ export class Dijkstra extends Graph {
     }
 
 
-    shortest(from) {
-        let fromIndex = this.findVertexIndex(from);
+    shortest(source) {
+        const sourceIndex = this.findVertexIndex(source);
         /**
          * 출발점 'from'으로부터 각 정점까지의 최단 경로를 나타내는 배열
          * 출발점과 동일한 정점은 0, 나머지는 Infinity로 지정한다.
          */
         const shortest = this.vertices.map((vertex, index) => {
             return {
-                distance: index === fromIndex ? 0 : Infinity, // 최단 경로의 거리
+                distance: index === sourceIndex ? 0 : Infinity, // 최단 경로의 거리
                 path: [] // 최단 경로의 배열
             }
         });
 
         const visitedIndex = [];
-
-        while (fromIndex) {
-            visitedIndex[fromIndex] = true;
+        let currIndex = sourceIndex;
+        while (currIndex) { // 방문 시작
+            visitedIndex[currIndex] = true; // 현재 정점을 방문 이력에 남깁니다.
             // 현재 정점에 연결된 정점에 대한 최단 거리 갱신
-            let nextIndex = null;
-            this.edges[fromIndex].forEach( edge => {
+            let nextIndex = null; // 다음에 방문 예정인 인덱스를 임시로 저장할 변수를 준비합니다.
+            // 현재 정점으로 부터 갈 수 있는 모든 정점을 탐색합니다.
+            this.edges[currIndex].forEach( edge => {
                 const toIndex = this.findVertexIndex(edge.dest);
-                if (!visitedIndex[toIndex]) {
-                    if (shortest[toIndex].distance > shortest[fromIndex].distance + edge.weight) {
-                        shortest[toIndex].distance = shortest[fromIndex].distance + edge.weight;
-                        shortest[toIndex].path = shortest[fromIndex].path.concat(toIndex);
+                if (!visitedIndex[toIndex]) { // 이미 방문한 정점이면 무시하고 아직 방문전인 정점만 탐색합니다.
+                    /*
+                    1. shortest[toIndex].distance = sourceIndex에서 toIndex까지의 현재 저장된 거리
+                    2. shortest[currIndex].distance = sourceIndex에서 currIndex까지의 현재 저장된 거리
+                    3. shortest[currIndex].distance + edge.weight = currIndex를 경유하여 toIndex까지 가는 거리
+                    1번과 3번 항목 중 1번 항목이 더 크다면 3번항목으로  1번 값을 변경한다.
+                    */
+                    if (shortest[toIndex].distance > shortest[currIndex].distance + edge.weight) {
+                        shortest[toIndex].distance = shortest[currIndex].distance + edge.weight; // 거리 갱신
+                        shortest[toIndex].path = shortest[currIndex].path.concat(toIndex); // 경로 갱신
                     }
                     /**
-                     * nextIndex가 null이면 toIndex
-                     * toIndex가 visitedIndex에 있으면
+                     * 다음에 방문 예정인 인덱스가 아직 지정되지 않았거나
+                     * 다음에 방문 예정인 인덱스까지의 거리보다 현재 분석한 정점까지의 거리가 더 짧다면
+                     * 다음에 방문 예정인 인덱스를 현재 분석한 정점으로 지정한다.
                      */
-                    nextIndex = !nextIndex ||  shortest[nextIndex].distance > shortest[toIndex].distance ? toIndex : nextIndex;
+                    nextIndex = !nextIndex || shortest[nextIndex].distance > shortest[toIndex].distance ? toIndex : nextIndex;
                 }
             });
-            fromIndex = nextIndex;
+            currIndex = nextIndex; // 다음에 방문 예정인 인덱스를 확정한다.
         }
         return shortest;
     }
