@@ -35,7 +35,7 @@ C#, 자바와 같은 일반적인 객체지향 언어에서 사용되는 자료�
 
 #### 그래프 알고리즘
 * [다익스트라 알고리즘](./advanced/graph/single_source_shortest_path)
-* [플로이드 워셜 알고리즘](./advanced/graph/all_pairs_shortes_path)
+* [플로이드 워셜 알고리즘](./advanced/graph/all_pairs_shortest_path)
 * [최소신장 알고리즘](./advanced/graph/minimum_spanning_tree)
 * [TSP 알고리즘](./advanced/graph/travelling_salesman_problem)
 
