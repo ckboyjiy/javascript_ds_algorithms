@@ -151,11 +151,11 @@ class Dijkstra extends Graph {
 위의 그래프 그림을 참고하여 그래프 생성 및 정점 및 간선을 설정하면 아래와 같습니다.
 ```javascript
 const graph = new Dijkstra();
-graph.addVertex('A');
-graph.addVertex('B');
-graph.addVertex('C');
-graph.addVertex('D');
-graph.addVertex('S')
+graph.addVertex('A'); // index : 0
+graph.addVertex('B'); // index : 1
+graph.addVertex('C'); // index : 2
+graph.addVertex('D'); // index : 3
+graph.addVertex('S'); // index : 4
 
 graph.addEdge('A', 'B', 2);
 graph.addEdge('A', 'C', 5);
