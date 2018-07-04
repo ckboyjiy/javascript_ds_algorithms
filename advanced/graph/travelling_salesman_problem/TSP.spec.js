@@ -29,4 +29,26 @@ describe('TSP Algorithm test', () => {
         expect(result.minCost).to.equal(15);
         expect(result.minTour.join(', ')).to.equal('0, 4, 1, 2, 3, 0');
     });
+    it('case 2', () => {
+        const graph = new TSP();
+        graph.addVertex('A');
+        graph.addVertex('B');
+        graph.addVertex('C');
+        graph.addVertex('D');
+
+        const a = graph.combinations(0, 0, 4);
+        console.log(a[0].toString(2));
+    });
+
+    it('case 3', () => {
+        let a = 1 << 0;
+        console.log('a', a, a.toString(2));
+        let b = (1 << 1) + (1 << 2);
+        console.log(b, b.toString(2));
+        console.log(a & b);
+        console.log(a & (b + a));
+        console.log(a | b);
+        console.log(a | (b + a));
+        console.log((b + a).toString(2), a.toString(2), ((b + a) ^ a).toString(2));
+    })
 })
